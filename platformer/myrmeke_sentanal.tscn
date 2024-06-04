@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=3 uid="uid://cybgaeta4robt"]
+
+[ext_resource type="Script" path="res://scripts/Mermake_Sentanal.gd" id="1_321n7"]
+[ext_resource type="Texture2D" uid="uid://dmr1m7d4tmkxn" path="res://myrmeke_sentanal.png" id="2_xc7yx"]
+
+[sub_resource type="Animation" id="Animation_m4x77"]
+resource_name = "Atack"
+length = 0.833352
+loop_mode = 1
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 1, 2, 3, 2, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1667, 0.5, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"locktarget"
+}, {
+"args": [],
+"method": &"shoot"
+}, {
+"args": [],
+"method": &"moveEnd"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jbwil"]
+resource_name = "idle"
+length = 3.33336
+loop_mode = 1
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3.33333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"moveEnd"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pigmk"]
+_data = {
+"Atack": SubResource("Animation_m4x77"),
+"idle": SubResource("Animation_jbwil")
+}
+
+[node name="myrmeke sentanal" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_321n7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_xc7yx")
+hframes = 6
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pigmk")
+}
